@@ -1,0 +1,9 @@
+{
+    "extends": "../../tsconfig.json",
+    "include": [
+        "isInArray.ts",
+        "summator.ts",
+        "getUnique.ts",
+        "toMatrix.ts"
+    ]
+}
