@@ -1,3 +1,4 @@
+"use strict";
 /* 1)
    Написать функцию isInArray(), которая начиная со второго принимает переменное количество аргументов.
    Возвращает true, если все аргументы, кроме первого входят в первый.
@@ -9,29 +10,18 @@ function isInArray(arr) {
         rest[_i - 1] = arguments[_i];
     }
     console.log("Array: " + arr + ",\n Arguments: " + rest);
-    for (var i = 0, len = rest.length; i < len; i++) {
-        if (typeof rest[i] !== 'object') {
-            if (!~arr.indexOf(rest[i]))
-                return false;
-        }
-        else {
-            var isThereSuchAnObject = false;
-            for (var i_1 = 0, len_1 = arr.length; i_1 < len_1; i_1++) {
-                if (typeof arr[i_1] === 'object' && JSON.stringify(arr[i_1]) === JSON.stringify(rest[i_1])) {
-                    isThereSuchAnObject = true;
-                }
-            }
-            if (!isThereSuchAnObject)
-                return false;
-        }
-    }
-    return true;
+    return rest.every(function (item) {
+        return arr.includes(item);
+    });
 }
+// tried "...args: Primitives[]" below, but it causes errors in reduce methods
 function summator() {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
     }
+    // it's not possible to check an Array for a type at runtime, so I check only first item 
+    // (rest of them will have the same type as we've restricted their number by overloads)
     if (typeof args[0] === 'number') {
         return args.reduce(function (sum, currentVal) {
             return sum + currentVal;
@@ -54,48 +44,22 @@ function getUnique() {
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
     }
-    return args.reduce(function (uniqueArray, currentVal) {
-        if (typeof currentVal !== 'object') {
-            if (!~uniqueArray.indexOf(currentVal))
-                uniqueArray.push(currentVal);
+    return Array.from(new Set(args));
+}
+;
+function toMatrix(_a) {
+    var _b = _a === void 0 ? { vector: [1], rowSize: 1 } : _a, _c = _b.vector, vector = _c === void 0 ? [1] : _c, _d = _b.rowSize, rowSize = _d === void 0 ? 1 : _d;
+    var counter = 0;
+    return vector.reduce(function (matrix, item, i, arr) {
+        matrix[counter] = matrix[counter] || [];
+        if (matrix[counter].length < rowSize) {
+            matrix[counter].push(item);
         }
         else {
-            var isValueUnique = true;
-            for (var i = 0, len = uniqueArray.length; i < len; i++) {
-                if (typeof uniqueArray[i] === 'object' && JSON.stringify(uniqueArray[i]) === JSON.stringify(currentVal)) {
-                    isValueUnique = false;
-                }
-            }
-            if (isValueUnique)
-                uniqueArray.push(currentVal);
+            counter++;
+            matrix[counter] = [item];
         }
-        return uniqueArray;
+        return matrix;
     }, []);
 }
-/*
- 4)
- Дописать функцию toMatrix(data, rowSize), которая принимает аргументом массив и число,
- возвращает новый массив. Число показывает количество элементов в подмассивах,
- элементы подмассивов беруться из массива data.
- Оригинальный массив не должен быть изменен.
-*/
-function toMatrix(vector, rowSize) {
-    if (rowSize === void 0) { rowSize = 1; }
-    var matrix = [];
-    var rowForMatrix = [];
-    for (var i = 0, len = vector.length, counter = 0; i < len; i++) {
-        if (counter !== rowSize) {
-            rowForMatrix.push(vector[i]);
-            counter++;
-        }
-        else {
-            matrix.push(rowForMatrix);
-            rowForMatrix = [];
-            rowForMatrix.push(vector[i]);
-            counter = 1;
-        }
-    }
-    if (rowForMatrix.length > 0)
-        matrix.push(rowForMatrix);
-    return matrix;
-}
+//# sourceMappingURL=masterpiece.js.map
