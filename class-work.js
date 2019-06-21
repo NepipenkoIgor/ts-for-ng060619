@@ -1,135 +1,58 @@
 "use strict";
-// let num: number = NaN;
-// let str: string = 'str';
-// let bool: boolean = true;
-// let und: undefined = undefined;
-// let nill: null = null;
-// let symbol: symbol = Symbol();
-// let bigInt: bigint = 400n;
+// @Component()
+// class Header {
+//     @Input()
+//     public value;
 //
-// type MyAccount = {
-//     readonly firstName: string;
-//     readonly age?: number;
-//     getName?(): {};
-// };
-//
-// //
-// const account: MyAccount = {
-//     firstName: 'Igor'
-// };
-//
-// let user: typeof account; 
-// //
-// // account.age = 25;
-// //
-// // let hashMap: { [info: string]: typeof account } = {
-// //     user1: account
-// // }
-//
-// let arr: Array<MyAccount> = [account];
-//
-// arr.reverse()
-// type MyAccount = {
-//     readonly firstName: string;
-//     readonly age?: number;
-//     getName?(): {};
-// };
-//
-// interface IName {
-//     readonly firstName: string;
-// }
-//
-// interface IAge {
-//     readonly age?: number;
-// }
-//
-// interface IAccount<Name, ID = string> extends IName, IAge {
-//     id: ID;
-//     getName(): Name;
-// }
-//
-// let admin: IAccount<{name: string, surname: string}>;
-// let user2:  IAccount<string>;
-//
-// class User implements IAccount {
-//     public readonly firstName!: string;
-//     public readonly age!: number;
-// }
-//
-// let anyType: void = undefined;
-//
-// function fn(): void {
-//
-// }
-// function average(...arg: sn []): string {
-//     const avg: number = 100 / 3;
-//     return `Average is ${avg}`;
-// }
-//
-// average(1);
-// average(1, 2, '3');
-// average(1, 2, 3);
-//
-// let str: number = average(1, 2, 3);
-// class BasePoint {
 //     public constructor(
-//         public readonly x: number,
-//         protected y: number,
-//         private z: number
-//     ) {
-//     }
+//         @Inject() http: HttpClient
+//     ){}
 //
-//     public sum(): number {
-//         return 30;
-//     }
+//     @HostListener()
+//     public click(event){
 //
-// }
-//
-// class Point extends BasePoint {
-//     public constructor(
-//         x: number,
-//         y: number,
-//         z: number
-//     ) {
-//         super(x, y, z);
-//     }
-//
-//     public sum(): number {
-//         console.log('Hi all');
-//         return super.sum();
 //     }
 // }
-//
-// class Singleton {
-//     private static instance: Singleton;
-//
-//     private constructor() {
-//     }
-//
-//     public static getInstance(): Singleton {
-//         if (!Singleton.instance) {
-//             Singleton.instance = new Singleton();
-//         }
-//         return Singleton.instance;
-//     }
-// }
-//
-// let ins: Singleton = Singleton.getInstance();
-// abstract class AbstractInput {
-//     public onFocus(): void {
-//
-//     }
-//
-//     public onBlur(): void {
-//
-//     }
-//
-//     public abstract getValue(): string;
-// }
-//
-// class CustomInput extends AbstractInput {
-//     public getValue(): string {
-//         return 'input';
-//     }
-// }
-console.log('TypeScript is Awesome !!!');
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+function debounce(ms) {
+    let timeout;
+    return function (target, key, descriptor) {
+        return {
+            ...descriptor,
+            value: (...args) => {
+                timeout ? clearTimeout(timeout) : null;
+                timeout = setTimeout(() => {
+                    console.log(`Call ${key.toString()}(${args.join()})`);
+                    timeout = null;
+                    descriptor.value(...args);
+                }, ms);
+            }
+        };
+    };
+}
+class MathLib {
+    areaOfCircle(r) {
+        const result = Math.PI * r ** 2;
+        console.log(result);
+    }
+}
+__decorate([
+    debounce(5000),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], MathLib.prototype, "areaOfCircle", null);
+const lib = new MathLib();
+lib.areaOfCircle(2);
+lib.areaOfCircle(3);
+lib.areaOfCircle(10);
+lib.areaOfCircle(16);
+lib.areaOfCircle(22);
