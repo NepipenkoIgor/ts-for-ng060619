@@ -1,24 +1,29 @@
 "use strict";
-// Task#1
+////// Task#1
 function isInArray(arg1, ...arg2) {
-    for (var i = 0; i < arg1.length; i++) {
-        for (var j = 0; j < arg2.length; j++) {
-            if (arg1[i] === arg2[j])
+    for (let i = 0; i < arg1.length; i++) {
+        for (let j = 0; j < arg2.length; j++) {
+            if (arg1[i] === arg2[j]) {
                 return true;
+            }
         }
-        // return false;
     }
     return false;
 }
-console.log(isInArray([1, 4, 6], 2, 8, 5));
-console.log(isInArray([1, 4, 6], 2, 3, 5, 0, 8, 6));
-// Task#2
+////// Task#2
 function summator(...arg) {
-    var result;
-    var sum, current, number;
+    let result;
     result = arg.reduce(function (sum, current) {
         return sum + current;
     });
     return result;
 }
-console.log(summator(1, 2, 3, 4));
+////// Task#3
+function getUnique(...arr) {
+    return new Set(arr);
+}
+////// Task#4
+function toMatrix(data, rowSize) {
+    const resultArray = data.map((_, i, arr) => arr.slice(i * rowSize, i * rowSize + rowSize)).filter((el) => el.length);
+    return resultArray;
+}
