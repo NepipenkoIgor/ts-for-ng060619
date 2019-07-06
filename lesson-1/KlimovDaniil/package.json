@@ -1,0 +1,21 @@
+{
+  "name": "KlimovDaniil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.5.2",
+    "webpack-cli": "^3.3.4"
+  },
+  "dependencies": {
+    "ts-node": "^8.2.0",
+    "tslint": "^5.17.0",
+    "webpack": "^4.34.0"
+  }
+}
